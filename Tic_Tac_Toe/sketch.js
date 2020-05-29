@@ -13,12 +13,12 @@ function compareArrays(arr1, arr2) {
   return true;
 }
 
-var devMode = true;
+var devMode = false;
 var board = [];
 var players = ["X", "O"];
 var currentPlayer = null;
 var availableCells = [];
-var gridSize = 3;
+var gridSize = 4;
 var canvasWidth = 500;
 var canvasHeight = canvasWidth;
 var columnWidth = canvasWidth / gridSize;
@@ -120,7 +120,7 @@ function setup() {
   frameRate(20);
   generateBoard(gridSize);
   devDisplay();
-  player = random(players);
+  player = "X";
 }
 
 function drawGrid() {
@@ -171,7 +171,6 @@ function gameCycle(xCoord, yCoord) {
     availableCells = availableCells.filter(function(cell){
       return !(compareArrays(cell,[xCoord,yCoord]));
     });
-    print(availableCells);
   } else {
       print(`An unacceptable move was made at ( ${xCoord}, ${yCoord} )`);
       return;
@@ -196,23 +195,24 @@ function draw() {
   drawGrid();
   if (keyIsPressed) {
     if (key == " ") {
-      let aiSelected = aiSelect();
-      gameCycle(aiSelected[0], aiSelected[1]);
+      if (player == "X"){
+        let aiSelected = aiSelect("X");
+        gameCycle(aiSelected[0], aiSelected[1]);
+      } else {
+        let randomSelected = randomAI("O");
+        gameCycle(randomSelected[0], randomSelected[1]);
+      }
     }
   }
   drawMarks();
 }
 
 function getBoard() {
-  return board;
-}
-
-function getCurrentPlayer() {
-  return player;
+  return JSON.parse(JSON.stringify(board));
 }
 
 function getAvailableCells() {
-  return availableCells;
+  return JSON.parse(JSON.stringify(availableCells));
 }
 
 function getGridSize() {
