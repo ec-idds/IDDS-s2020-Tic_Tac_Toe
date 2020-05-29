@@ -46,3 +46,71 @@
 function aiSelect() {
   return random(emptyCells(board));
 }
+
+function aiSelect(player){
+  if (player == "X"){
+    var opponent = "O";
+  } else {
+    var opponent = "X";
+  }
+  var currentBoard = getBoard();
+  var currentAvailableCells = getAvailableCells();
+  var potentialMoves = [];
+
+  for(let i = 0; i < currentAvailableCells.length; i++){
+    let aiMoveCell = currentAvailableCells[i];
+    let tempBoard = JSON.parse(JSON.stringify(currentBoard));
+    tempBoard[aiMoveCell[1]][aiMoveCell[0]] = "X";
+    let aiMoveResult = aiCheckWins(tempBoard);
+    if (aiMoveResult == ""){
+      let opponetMoveCells = currentAvailableCells.filter(function(cell){
+        return (JSON.stringify(cell) !== JSON.stringify(aiMoveCell));
+      });
+      for(let j = 0; j < opponetMoveCells.length; j++){
+        let opponentMoveCell = opponetMoveCells[j];
+        let forecastBoard = JSON.parse(JSON.stringify(tempBoard));
+        forecastBoard[opponentMoveCell[1]][opponentMoveCell[0]] = opponent;
+        let opponentMoveResult = aiCheckWins(forecastBoard);
+        if (opponentMoveResult == ""){
+          let endIndex = getGridSize() - 1;
+          for (let k = -1; k <= 1; k = k + 2) {
+            let xCoord = (endIndex) / 2 * (1 + k);
+            for (let l = -1; l <= 1; l = l + 2) {
+              let yCoord = (endIndex) / 2 * (1 + l);
+              if (tempBoard[yCoord][xCoord] == player){
+                if (aiMoveCell == [(endIndex) / 2 * (1 - k), (endIndex) / 2 * (1 - l)]){
+                potentialMoves.push([1, aiMoveCell]);
+                }
+              }
+            }
+          }
+          if ((aiMoveCell[0] == 0 || aiMoveCell[0] == endIndex) && (aiMoveCell[1] == 0 || aiMoveCell[1] == endIndex)){
+            potentialMoves.push([2, aiMoveCell]);
+          }else{
+            potentialMoves.push([3, aiMoveCell]);
+          }
+          
+        } else {
+          potentialMoves.push([0, opponentMoveCell]);
+          
+        }
+      }
+    } else {
+      potentialMoves.push([-1, aiMoveCell]);
+    }
+  }
+
+  var decisionArray = potentialMoves.sort(function(a, b){
+    if (a[0] < b[0]){
+      return -1;
+    } else if (a[0] > b[0]){
+      return 1;
+    } else{
+      return 0;
+    }
+  });
+  if (decisionArray[0]== null){
+    decisionArray.push([6, getAvailableCells()[0]]);
+  }
+  return decisionArray[0][1];
+}
