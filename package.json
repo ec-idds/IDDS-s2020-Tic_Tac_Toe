@@ -1,0 +1,24 @@
+{
+  "name": "idds-s2020-tic_tac_toe",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ec-idds/IDDS-s2020-Tic_Tac_Toe.git"
+  },
+  "author": "Mark Sherman, Mickey Barron, Jamison O'Sullivan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ec-idds/IDDS-s2020-Tic_Tac_Toe/issues"
+  },
+  "homepage": "https://github.com/ec-idds/IDDS-s2020-Tic_Tac_Toe#readme",
+  "devDependencies": {
+    "eslint": "^7.1.0",
+    "eslint-config-p5js": "^1.0.1",
+    "eslint-config-prettier": "^6.11.0"
+  }
+}
