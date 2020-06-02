@@ -47,13 +47,25 @@
  *    🚫 STUDENTS: DO NOT MODIFY THIS FILE 🚫
  */
 
+
+/* Declaration of variables 
+*
+* - This game is generated procedurally allowing you to change the size of the board and the dimensions of the grid.
+*
+* - gridSize dictates the size of the grid by defining one side of the square. 
+*   For example, if you set gridSize = 4, it will make 4x4 grid with a total of 16 squares.
+*
+*- The canvas dimensions are specified by the canvasWidth and canvasHeight variables.
+*  The defauly setting for canvasHeight is to be equal to the canvasWidth such that it's a square.
+*
+*/
 var board = [];
-var players = ['❌', '⭕'];
-var gridSize = 3;
-var canvasWidth = 500;
-var canvasHeight = canvasWidth;
-var columnWidth = canvasWidth / gridSize;
-var rowHeight = canvasHeight / gridSize;
+const players = ['❌', '⭕'];
+const gridSize = 3;
+const canvasWidth = 500;
+const canvasHeight = canvasWidth;
+const columnWidth = canvasWidth / gridSize;
+const rowHeight = canvasHeight / gridSize;
 var player;
 
 // Whenever the Spacebar is pressed, the AI takes a turn
@@ -63,6 +75,8 @@ function keyPressed() {
   }
 }
 
+
+//This procedurally generates an array of based upon the size of the grid. The array is empty to be filled with player characters
 function generateBoard() {
   for (let i = 0; i < gridSize; i++) {
     for (let j = 0; j < gridSize; j++) {
@@ -71,6 +85,8 @@ function generateBoard() {
   }
 }
 
+
+//When invoked, this function detects if there is a win in one of the following diretions: horizontal, verticle, or diagonal. The function accepts a direction argument.
 function checkWin(direction) {
   let pathResult;
   let headerCell;
@@ -146,6 +162,8 @@ function setup() {
   noLoop(); // noLoop should be the last line in the block
 }
 
+
+//Procedural generation of grid.
 function drawGrid() {
   background(255, 255, 255);
   let columnWidth = canvasWidth / gridSize;
@@ -161,6 +179,7 @@ function drawGrid() {
   }
 }
 
+//Generation of Xs and Os in the grid
 function drawMarks() {
   for (let i = 0; i < gridSize; i++) {
     for (let j = 0; j < gridSize; j++) {
