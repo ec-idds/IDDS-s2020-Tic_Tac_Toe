@@ -82,7 +82,10 @@ function mouseClicked(){
   let cellX = floor(mouseX / columnWidth);
   let cellY = floor(mouseY / rowHeight);
   play(cellY, cellX);
+<<<<<<< HEAD
   return;
+=======
+>>>>>>> 12cf71d... Added click interface for playing
 }
 >>>>>>> Updated mouse function to return
 
