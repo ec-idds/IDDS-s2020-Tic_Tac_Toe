@@ -81,6 +81,7 @@ function mouseClicked(){
   play(cellY, cellX);
   return;
 }
+
 function generateBoard() {
   for (let i = 0; i < gridSize; i++) {
     for (let j = 0; j < gridSize; j++) {
