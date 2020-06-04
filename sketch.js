@@ -75,6 +75,16 @@ function keyPressed() {
   }
 }
 
+<<<<<<< eadd62a5faa82ca5123e1e33e586fe34cfd5e554
+=======
+// Whenever a cell is clicked, a turn is taken at that cell.
+function mouseClicked(){
+  let cellX = floor(mouseX / columnWidth);
+  let cellY = floor(mouseY / rowHeight);
+  play(cellY, cellX);
+  return;
+}
+>>>>>>> Updated mouse function to return
 
 //This procedurally generates an array of based upon the size of the grid. The array is empty to be filled with player characters
 function generateBoard() {
